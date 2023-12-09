@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domino Triangle</title>
+    <link rel="icon" href="img/logo.png" >
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="maincontainer">
+        <main>
+            <section class="play">
+                <div class="game">
+                    <div class="box" id="thegame">
+                        <div style="justify-content: center;display: flex; align-items: center;column-gap: 20px;">
+                            <span
+                                style="color:red;font-family:Verdana, Geneva, Tahoma, sans-serif;font-weight: 800;font-size:xx-large;"
+                                id="span"> PLAY</span>
+                            <button id="btn" class="playBtn"></button>
+                        </div>
+                        <div class="rows" id="rows">
+
+                        </div>
+                        <br>
+                        <div class="drawing">
+                            <label id="chances">Доступные перетасовки - 4</label>
+                            <div class="container" id="coll">
+                                <div class="card2 draggable" draggable="true" style="background-size:cover;"
+                                    id="coloda">
+
+                                </div>
+                            </div>
+                            <button class="drawbtn" id="drawbtn">Draw</button>
+                            <div class="container" id="curr">
+                                <div class="card2 draggable" draggable="true" style="background-size:cover;"
+                                    id="current">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <h1>Қуаныш Дания Жандосқызы</h1>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="win" id="win-panel">
+                        <div class="win-panel">
+                            <img src="/img/emoji.png" alt="">
+                            <p class="win-text"> Congratulations you won!</p>
+                        </div>
+                </div>
+            </section>
+        </main>
+        <section>
+
+        </section>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>

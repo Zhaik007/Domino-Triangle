@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Пасьянс Пирамида с Домино</title>
+  <style>
+    /* Добавьте стили для визуализации домино, если нужно */
+    .domino {
+      border: 1px solid #000;
+      width: 40px;
+      height: 80px;
+      margin: 2px;
+      display: inline-block;
+      text-align: center;
+      line-height: 80px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="pyramid"></div>
+  <button onclick="drawDomino()">Взять домино</button>
+
+  <script>
+    // Создание колоды домино
+    const values = ['0', '1', '2', '3', '4', '5', '6'];
+    
+    let dominoDeck = [];
+
+    for (const value1 of values) {
+      for (const value2 of values) {
+        dominoDeck.push({ value1, value2 });
+      }
+    }
+
+    // Перемешивание колоды
+    function shuffleDominoDeck() {
+      for (let i = dominoDeck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [dominoDeck[i], dominoDeck[j]] = [dominoDeck[j], dominoDeck[i]];
+      }
+    }
+
+    // Генерация пирамиды
+    function generatePyramid() {
+      const pyramid = [];
+      let dominoIndex = 0;
+
+      for (let row = 1; row <= 4; row++) {
+        const pyramidRow = [];
+        for (let col = 1; col <= row; col++) {
+          pyramidRow.push({ domino: dominoDeck[dominoIndex++], selected: false });
+        }
+        pyramid.push(pyramidRow);
+      }
+
+      return pyramid;
+    }
+
+    // Отображение пирамиды
+    function drawPyramid() {
+      const pyramidElement = document.getElementById('pyramid');
+      pyramidElement.innerHTML = '';
+
+      const pyramid = generatePyramid();
+
+      for (let row = 0; row < pyramid.length; row++) {
+        const rowElement = document.createElement('div');
+        rowElement.classList.add('pyramid-row');
+
+        for (let col = 0; col < pyramid[row].length; col++) {
+          const domino = pyramid[row][col].domino;
+          const dominoElement = document.createElement('div');
+          dominoElement.classList.add('domino');
+          dominoElement.textContent = `${domino.value1}-${domino.value2}`;
+
+          // Добавляем обработчик событий для выбора карты
+          dominoElement.addEventListener('click', () => selectDomino(row, col));
+
+          rowElement.appendChild(dominoElement);
+        }
+
+        pyramidElement.appendChild(rowElement);
+      }
+    }
+
+    // Выбор домино в пирамиде
+    function selectDomino(row, col) {
+      const pyramid = generatePyramid();
+
+      // Проверяем, можно ли уничтожить выбранную карту
+      if (pyramid[row][col].selected) {
+        // Проводим логику уничтожения
+        destroySelectedDomino(row, col);
+
+        // Отображаем обновленную пирамиду
+        drawPyramid();
+      } else {
+        // Снимаем выделение с предыдущей выбранной карты
+        resetSelectedDomino(pyramid);
+
+        // Выделяем новую карту
+        pyramid[row][col].selected = true;
+
+        // Отображаем обновленную пирамиду
+        drawPyramid();
+      }
+    }
+
+    // Уничтожение выбранной карты
+    function destroySelectedDomino(row, col) {
+      const pyramid = generatePyramid();
+      const selectedDomino = pyramid[row][col].domino;
+
+      // Проверяем, можно ли уничтожить пару карт
+      if (canDestroyPair(pyramid, row, col, selectedDomino)) {
+        // Удаляем пару карт
+        pyramid[row][col] = { domino: null, selected: false };
+        const adjacentDomino = getAdjacentDomino(row, col);
+        pyramid[adjacentDomino.row][adjacentDomino.col] = { domino: null, selected: false };
+
+        // Открываем доступ к верхней карте
+        openAccessToTop(pyramid, row, col);
+      }
+    }
+
+    // Проверка, можно ли уничтожить пару карт
+    function canDestroyPair(pyramid, row, col, selectedDomino) {
+      const adjacentDomino = getAdjacentDomino(row, col);
+      const adjacentDominoValue = pyramid[adjacentDomino.row][adjacentDomino.col].domino;
+
+      // Добавьте свою логику проверки, например, проверку суммы значений
+      return selectedDomino.value1 + adjacentDominoValue.value2 === 12 ||
+             selectedDomino.value2 + adjacentDominoValue.value1 === 12;
+    }
+
+    // Получение соседнего домино
+    function getAdjacentDomino(row, col) {
+      const adjacentRow = row + 1;
+      const adjacentCol = col % adjacentRow === 0 ? col : col + 1;
+      return { row: adjacentRow, col: adjacentCol };
+    }
+
+    // Снятие выделения с предыдущей выбранной карты
+    function resetSelectedDomino(pyramid) {
+      for (let r = 0; r < pyramid.length; r++) {
+        for (let c = 0; c < pyramid[r].length; c++) {
+          pyramid[r][c].selected = false;
+        }
+      }
+    }
+
+    // Открытие доступа к верхней карте
+    function openAccessToTop(pyramid, row, col) {
+      // Добавьте свою логику открытия доступа к верхней карте
+    }
+
+    // Взять домино из колоды
+    function drawDomino() {
+      if (dominoDeck.length > 0) {
+        const drawnDomino = dominoDeck.pop();
+        console.log(`Вы взяли домино: ${drawnDomino.value1}-${drawnDomino.value2}`);
+        // Добавьте обработку взятых домино в вашем приложении
+        drawPyramid();
+      } else {
+        console.log('Колода домино пуста');
+      }
+    }
+
+    // Запуск игры
+    shuffleDominoDeck();
+    drawPyramid();
+  </script>
+</body>
+</html>
