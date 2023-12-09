@@ -58,9 +58,9 @@ let pirindex =[]
 
 function random_card(i,ln){
     let bol = false
-    if(i==ln-1){
-        bol = true
-    }
+    // if(i==ln-1){
+    //     bol = true
+    // }
     let nomer =0
     nomer=Math.floor(Math.random() * cardpair.length);
     let card_shablon = `<div class="${bol==true?"container":""}" id="box${index}" datavalue="${index}"><div class="card2 ${bol==true?"draggable":""}" draggable="${bol}" datavalue="${index}" chislo="${Number(cardpair[nomer][0])+Number(cardpair[nomer][1])}" style="background-image:url(img/card${cardpair[nomer]}.png);     background-size: cover;"></div> </div>`;
