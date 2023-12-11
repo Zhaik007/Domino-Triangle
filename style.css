@@ -8,7 +8,6 @@
     text-align: center; display: flex;justify-content: center; column-gap: 20px;
 }
 .box{
-    margin:50px;
     justify-content: center;
 }
 
@@ -145,6 +144,7 @@
 .play{
     display: flex;
     justify-content: center;
+    margin:50px;
 }
 
 .win-text{
@@ -153,4 +153,25 @@
     font-weight: bold;
     font-family:cursive;
     padding: 20px;
+}
+
+.instr{
+    width:100%;
+    padding: 16px;
+    outline: #c94545;
+    border:solid 1px #c94545;
+    border-radius: 5px;
+    margin: 10px;
+
+}
+
+.box label{
+    color:#c94545;
+    line-height: 22px;
+    font-size: 18px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.ins-panel{
+    width:50%;
 }
