@@ -147,14 +147,6 @@
     margin:50px;
 }
 
-.win-text{
-    font-size: 45px;
-    color: #e1434b;
-    font-weight: bold;
-    font-family:cursive;
-    padding: 20px;
-}
-
 .instr{
     width:100%;
     padding: 16px;
@@ -175,4 +167,13 @@
 .ins-panel{
     width:50%;
 }
+.win-text{
+    font-size: 45px;
+    color: #e1434b;
+    font-weight: bold;
+    font-family:cursive;
+    padding: 20px;
+}
+
+
 /* New */
