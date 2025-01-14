@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domino Triangle</title>
+    <link rel="icon" href="img/logo.png">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(95830495, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/95830495" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+
+<body>
+    <div class="maincontainer">
+        <main>
+            <section class="play">
+                <div class="game">
+                    <div class="box" id="thegame">
+                        <div style="justify-content: center;display: flex; align-items: center;column-gap: 20px;">
+                            <span
+                                style="color:red;font-family:Verdana, Geneva, Tahoma, sans-serif;font-weight: 800;font-size:xx-large;"
+                                id="span"> PLAY</span>
+                            <button id="btn" class="playBtn"></button>
+                        </div>
+                        <div class="rows" id="rows">
+
+                        </div>
+                        <br>
+                        <div class="drawing">
+                            <label id="chances">Доступные перетасовки - 4</label>
+                            <div class="container" id="coll">
+                                <div class="card2 draggable" draggable="true" style="background-size:cover;"
+                                    id="coloda">
+
+                                </div>
+                            </div>
+                            <button class="drawbtn" id="drawbtn">Draw</button>
+                            <div class="container" id="curr">
+                                <div class="card2 draggable" draggable="true" style="background-size:cover;"
+                                    id="current">
+
+                                </div>
+                            </div>
+                        </div>
+                        <h1>Қуаныш Дания Жандосқызы</h1>
+
+                        <div class="box" style="display:flex; column-gap: 50px;">
+                            <div class="ins-panel">
+                                <label>Цель игры:</label>
+                                <input type="text"
+                                    value="1. Развить скорость мышления, логические и функциональные способности у детей старше 6 лет"
+                                    readonly class="instr">
+                                <input type="text"
+                                    value="2. Разрушить пирамиду составленную из заданных костяшек домино" readonly
+                                    class="instr">
+                                <label for="">Правила игры: </label>
+                                <input type="text"
+                                    value="1. Каждая точка домино дает соответствующую цифру, (например костяшка с точками 3/4 дает цифру 7)"
+                                    readonly class="instr">
+                                <input type="text"
+                                    value="2. Чтобы убрать костяшку в пирамиде сумма двух доминошек должен составить 12 (например чтоб убрать костяжку с точками 3/4 на нужны костяжки с точками 5/0, 4/1, 3,2, 2/3, 1/4, 0/5)"
+                                    readonly class="instr">
+                                <input type="text" value="3. Перетасовать можно только 4 раза
+                                " readonly class="instr">
+                                <input type="text"
+                                    value="4. Чтобы достичь вершины пирамиду Игрок должен начать убирать пирамиду с нижней строки и достичь самой вершины пирамиды."
+                                    readonly class="instr">
+                            </div>
+                            <div class="ins-panel">
+                                <label>Ойынның мақсаты:</label>
+                                <input type="text" 
+                                    value="1. 6 жастан асқан балалардың ойлау жылдамдығын, логикалық және функционалдық қабілеттерін дамыту
+                                " readonly class="instr">
+                                <input type="text" 
+                                    value="2. Берілген доминолардан тұратын пирамиданы жою арқылы жеңу" readonly class="instr">
+                                <label for=""> Ойын ережесі: </label>
+                                <input type="text" 
+                                    value=" 1. Әрбір домино нүктесі сәйкес санды береді (мысалы, 3/4 нүктесі бар домино 7 санын береді)" readonly class="instr">
+                                <input type="text"
+                                    value="2. Пирамидадағы доминоны алып тастау үшін екі доминоның қосындысы 12-ге тең болуы керек (мысалы, 3/4 ұпайлары бар доминоны алып тастау үшін 5/0, 4/1, 3.2, 2/3 ұпайлары бар домино тастары қажет) "
+                                    readonly class="instr">
+                                <input type="text" 
+                                    value="3. Домино таяқшаларымен тек 4 рет айналым жасауға болады" readonly class="instr">
+                                <input type="text" 
+                                    value=" 4. Пирамиданың жоғарғы жағына жету үшін ойыншы пирамиданы төменгі жағынан бастап қана жоя алады" readonly class="instr">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="win" id="win-panel">
+                    <div class="win-panel">
+                        <img src="img/emoji.png" alt="">
+                        <p class="win-text"> Congratulations you won!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <section>
+
+        </section>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
